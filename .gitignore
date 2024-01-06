@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+
+# Build files
+build/
+dist/
+*.log
+
+# Environment variables
+.env
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# IDE files
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Compiled files
+*.compiled
