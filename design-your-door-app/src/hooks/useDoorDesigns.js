@@ -13,6 +13,31 @@ function useDoorDesigns() {
         }
     ]);
 
+    const addDoorDesign = () => {
+        const newDoorDesign = {
+            position: [],
+            dimensions: { length: [null, null], height: [null, null] },
+            grid: [null, null],
+            doorStyle: null,
+            doorType: null,
+            doorColour: null,
+            windowInsert: { style: null, colour: null },
+            glass: null
+        };
+
+        setDoorDesigns([...doorDesigns, newDoorDesign]);
+    };
+
+    const removeDoorDesign = (index) => {
+        setDoorDesigns((prevDoorDesigns) =>
+            prevDoorDesigns.filter((_, i) => i !== index)
+        );
+    };
+
+    const clearDoorDesigns = () => {
+        setDoorDesigns([]);
+    };
+
     const availableDoorStyles = ['raised', 'carriage', 'flush'];
     const availableDoorTypes = ['short', 'long'];
     const availableColours = ['white', 'black', 'brown', 'charcoal', 'almond', 'sandstone', 'dark-brown'];
@@ -174,6 +199,9 @@ function useDoorDesigns() {
     };
 
     return {
+        addDoorDesign,
+        removeDoorDesign,
+        clearDoorDesigns,
         doorDesigns,
         getPosition,
         getDimensions,

@@ -14,14 +14,14 @@ function App() {
   const { currentStep, nextStep, prevStep, currentStepComplete, setCurrentStepComplete } = useSteps();
   const doorDesigns = useDoorDesigns();
   const [doorGraphic, setDoorGraphic] = useState('/assets/door-graphics/design.jpg');
-  const [mockupImage, setMockupImage] = useState('/asssets/house-images/mockup1.jpg')
+  const [mockupImage, setMockupImage] = useState(null)
   
   return (
     <div className="App">
       <Flex flexDirection="column" maxH="100vh">
         <Header currentStep = {currentStep}/>
         <Content currentStep = {currentStep} setCurrentStepComplete={setCurrentStepComplete} doorDesigns = {doorDesigns} mockupImage = {mockupImage} setMockupImage = {setMockupImage}/>
-        <Footer nextStep = {nextStep} prevStep = {prevStep} currentStepComplete = {currentStepComplete}/>
+        <Footer currentStep = {currentStep} nextStep = {nextStep} prevStep = {prevStep} currentStepComplete = {currentStepComplete}/>
       </Flex>
     </div>
   );

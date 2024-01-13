@@ -11,7 +11,7 @@ function Content({currentStep, setCurrentStepComplete, doorDesigns, mockupImage,
 
   return (
     <Flex flex='1'>
-      {currentStep == 1 &&  <GeneralLayout1 title="Choose House Image" text="Choose a preconfigured image, or upload you own." action={<ImageSelect setMockupImage = {setMockupImage} mockupImage = {mockupImage} getDoorPosition = {doorDesigns.getDoorPosition} setDoorPosition = {doorDesigns.setDoorPosition} setCurrentStepComplete = {setCurrentStepComplete}/>}/>}
+      {currentStep == 1 &&  <GeneralLayout1 title="Choose House Image" text="Choose a preconfigured image, or upload you own." action={<ImageSelect setMockupImage = {setMockupImage} mockupImage = {mockupImage} getDoorPosition = {doorDesigns.getDoorPosition} setDoorPosition = {doorDesigns.setDoorPosition} setCurrentStepComplete = {setCurrentStepComplete} addDoorDesign = {doorDesigns.addDoorDesign} setDoorSize={doorDesigns.setDoorSize} clearDoorDesigns = {doorDesigns.clearDoorDesigns}/>}/>}
       {currentStep == 2 &&  <GeneralLayout2 title="Choose House Image" text="Choose a preconfigured image, or upload you own." action={<Action1/>} canvas={<Canvas1/>}/>}
     </Flex>
   )
