@@ -6,10 +6,10 @@ function Header({currentStep}) {
 
     const getStepBoxStyle = (step) => {
         return {
-          bg: currentStep === step ? 'orange.500' : 'gray.100',
-          color: currentStep === step ? 'white' : 'black',
+          bg: currentStep.startsWith("" + step) ? 'orange.500' : 'gray.100',
+          color: currentStep.startsWith("" + step) ? 'white' : 'black',
           border: '1px',
-          borderColor: currentStep === step ? 'orange.600' : 'gray.300',
+          borderColor: currentStep.startsWith("" + step) ? 'orange.600' : 'gray.300',
           flex: '1',
         };
       };

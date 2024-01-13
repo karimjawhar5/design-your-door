@@ -1,28 +1,26 @@
 import { useState } from "react";
 
 const useSteps = () => {
-  const totalSteps = 4;
-  const [currentStep, setCurrentStep] = useState(1);
-  const [currentStepComplete, setCurrentStepComplete] = useState(false);
+  const [currentStep, setCurrentStep] = useState("1-mockup");
+  const [prevStep, setPrevStep] = useState(null);
+  const [nextStep, setNextStep] = useState(null);
 
-  const nextStep = () => {
-    if (currentStep < totalSteps) {
-      setCurrentStep((prevStep) => prevStep + 1);
-    }
+  const forward = () => {
+      setCurrentStep(nextStep);
   };
 
-  const prevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep((prevStep) => prevStep - 1);
-    }
+  const backward = () => {
+    setCurrentStep(prevStep);
   };
 
   return {
     currentStep,
-    nextStep,
+    setPrevStep,
     prevStep,
-    currentStepComplete,
-    setCurrentStepComplete,
+    setNextStep,
+    nextStep,
+    forward,
+    backward
   };
 };
 

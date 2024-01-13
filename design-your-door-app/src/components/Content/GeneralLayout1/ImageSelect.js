@@ -8,7 +8,7 @@ const defaultMockups = [
   {path:'/assets/house-images/mockup1.jpg', sizes:[[[8,0],[7,0]]], positions:[[[0,0],[100,0],[0,100],[100,100]]]}
 ];
 
-const ImageSelect = ({setMockupImage, mockupImage, setDoorPosition, setCurrentStepComplete, addDoorDesign, clearDoorDesigns, setDoorSize}) => {
+const ImageSelect = ({setMockupImage, mockupImage, setDoorPosition, setNextStep, setPrevStep, addDoorDesign, clearDoorDesigns, setDoorSize}) => {
 
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -16,16 +16,17 @@ const ImageSelect = ({setMockupImage, mockupImage, setDoorPosition, setCurrentSt
   useEffect(()=>{
     clearDoorDesigns();
     setMockupImage(null);
-    setCurrentStepComplete(false);
+    setNextStep(null);
+    setPrevStep(null);
   }, [])
 
-  useEffect(()=>{
-    if (mockupImage != null){
-      setCurrentStepComplete(true);
-    }else{
-      setCurrentStepComplete(false);
-    }
-  }, [mockupImage])
+  // useEffect(()=>{
+  //   if (mockupImage != null){
+  //     setCurrentStepComplete(true);
+  //   }else{
+  //     setCurrentStepComplete(false);
+  //   }
+  // }, [mockupImage])
 
   const handleSelect = (index) => {
       setSelectedIndex(index+1);
@@ -35,6 +36,7 @@ const ImageSelect = ({setMockupImage, mockupImage, setDoorPosition, setCurrentSt
         setDoorPosition(defaultMockups[index].positions[i], i);
         setDoorSize(defaultMockups[index].sizes[i][0],defaultMockups[index].sizes[i][1] ,i)
         setUploadedImage(null);
+        setNextStep("3-design-door");
       }
   };
 
@@ -47,6 +49,7 @@ const ImageSelect = ({setMockupImage, mockupImage, setDoorPosition, setCurrentSt
         setUploadedImage(imageUrl);
         setMockupImage(imageUrl);
         clearDoorDesigns();
+        setNextStep("2-add-doors");
       } catch (error) {
         console.error("Error creating object URL:", error);
       }
