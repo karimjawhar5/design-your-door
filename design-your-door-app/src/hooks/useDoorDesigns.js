@@ -13,11 +13,51 @@ function useDoorDesigns() {
         }
     ]);
 
-    const addDoorDesign = () => {
+    //Fix this ASAP
+    function sizeFunction (length, height) {
+        let x = (length[0]*12)+length[1];
+        let y = (height[0]*12)+height[1];
+
+        let cols = 0;
+        let rows = 0;
+        
+        if (x % 48 < x % 60){
+            let n = 0;
+            while (x - n >= 48){
+                n += 48;
+                cols++;
+            }
+        } else {
+            let n = 0;
+            while (x - n >= 60){
+                n += 60;
+                cols++;
+            }
+        }
+
+        if (y % 18 < y % 21){
+            let n = 0;
+            while (y - n >= 18){
+                n += 18;
+                rows++;
+            }
+        } else {
+            let n = 0;
+            while (y - n >= 21){
+                n += 21;
+                rows++;
+            }
+        }
+        return [cols, rows];
+    }
+
+    const addDoorDesign = (length, height) => {
+        const cols = sizeFunction(length, height)[0];
+        const rows = sizeFunction(length, height)[1];
         const newDoorDesign = {
             position: [],
-            dimensions: { length: [null, null], height: [null, null] },
-            grid: [null, null],
+            dimensions: { length: length, height: height },
+            grid: [cols, rows],
             doorStyle: null,
             doorType: null,
             doorColour: null,
@@ -78,39 +118,8 @@ function useDoorDesigns() {
 
     // Setters
     const setDoorSize = (length, height, index) => {
-        let x = (length[0]*12)+length[1];
-        let y = (height[0]*12)+height[1];
-
-        let cols = 0;
-        let rows = 0;
-        
-        if (x % 48 < x % 60){
-            let n = 0;
-            while (x - n >= 48){
-                n += 48;
-                cols++;
-            }
-        } else {
-            let n = 0;
-            while (x - n >= 60){
-                n += 60;
-                cols++;
-            }
-        }
-
-        if (y % 18 < y % 21){
-            let n = 0;
-            while (y - n >= 18){
-                n += 18;
-                rows++;
-            }
-        } else {
-            let n = 0;
-            while (y - n >= 21){
-                n += 21;
-                rows++;
-            }
-        }
+        const cols = sizeFunction(length, height)[0];
+        const rows = sizeFunction(length, height)[1];
         setDoorDesigns((prevDesigns) => {
         const newDesigns = [...prevDesigns];
         newDesigns[index] = {

@@ -8,7 +8,7 @@ const defaultMockups = [
   {path:'/assets/house-images/mockup1.jpg', sizes:[[[8,0],[7,0]]], positions:[[[0,0],[100,0],[0,100],[100,100]]]}
 ];
 
-const ImageSelect = ({setMockupImage, mockupImage, setDoorPosition, setNextStep, setPrevStep, addDoorDesign, clearDoorDesigns, setDoorSize}) => {
+const ImageSelect = ({setMockupImage, setDoorPosition, setNextStep, setPrevStep, addDoorDesign, clearDoorDesigns}) => {
 
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -20,21 +20,12 @@ const ImageSelect = ({setMockupImage, mockupImage, setDoorPosition, setNextStep,
     setPrevStep(null);
   }, [])
 
-  // useEffect(()=>{
-  //   if (mockupImage != null){
-  //     setCurrentStepComplete(true);
-  //   }else{
-  //     setCurrentStepComplete(false);
-  //   }
-  // }, [mockupImage])
-
   const handleSelect = (index) => {
       setSelectedIndex(index+1);
       setMockupImage(defaultMockups[index].path);
       for (let i = 0; i < defaultMockups[index].positions.length; i++) {
-        addDoorDesign();
+        addDoorDesign(defaultMockups[index].sizes[i][0],defaultMockups[index].sizes[i][1]);
         setDoorPosition(defaultMockups[index].positions[i], i);
-        setDoorSize(defaultMockups[index].sizes[i][0],defaultMockups[index].sizes[i][1] ,i)
         setUploadedImage(null);
         setNextStep("3-design-door");
       }
@@ -68,21 +59,21 @@ const ImageSelect = ({setMockupImage, mockupImage, setDoorPosition, setNextStep,
       <Grid templateColumns="repeat(4, 2fr)" gap={4} py={4}>
 
         <GridItem key={0} colSpan={1}>
-          <Box {...getRootProps()} pos="relative" className="dropzone" h="250px" bgImage={`url(${uploadedImage})`} bgSize="cover" bgPosition="center center" border={selectedIndex==0 ? '4px' : '1px'} borderColor={selectedIndex==0 ? 'orange.500' : 'gray.300'} color={selectedIndex==0 ? 'gray.700' : 'gray.500'}>
+          <Box {...getRootProps()} pos="relative" className="dropzone" h="250px" bgImage={`url(${uploadedImage})`} bgSize="cover" bgPosition="center center" border={selectedIndex==0 ? '4px' : '1px'} borderColor={selectedIndex==0 ? 'orange.500' : 'gray.300'} color={selectedIndex==0 ? 'gray.800' : 'gray.600'}>
             <input {...getInputProps()} />
             {
               uploadedImage ? (
                 <Center flexDirection='column' zIndex={1}>
-                  <IoCloudUploadOutline size={80} />
-                  <Text size='sm'>Click To Replace Image</Text>
-                  <Text size='sm' color='orange.500'>Browse Images</Text>
+                  {<IoCloudUploadOutline size={80} /> && (selectedIndex==0)}
+                  <Text size='sm' as='b'>Click To Replace Image</Text>
+                  <Text size='sm' as='u' color='orange.500' >Browse Images</Text>
               </Center>
               ) :
               (
                 <Center flexDirection='column' zIndex={1}>
                   <IoCloudUploadOutline size={80} />
-                  <Text size='sm'>Click To Replace Image</Text>
-                  <Text size='sm' color='orange.500'>Browse Images</Text>
+                  <Text size='sm' >Click To Replace Image</Text>
+                  <Text size='sm' as='u' color='orange.500'>Browse Images</Text>
               </Center>
               )
             }

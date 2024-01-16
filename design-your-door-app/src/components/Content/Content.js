@@ -11,9 +11,8 @@ function Content({currentStep, setNextStep, setPrevStep, doorDesigns, mockupImag
 
   return (
     <Flex flex='1'>
-      {currentStep == "1-mockup" &&  <GeneralLayout1 title="Choose House Image" text="Choose a preconfigured image, or upload you own." action={<ImageSelect setMockupImage = {setMockupImage} mockupImage = {mockupImage} getDoorPosition = {doorDesigns.getDoorPosition} setDoorPosition = {doorDesigns.setDoorPosition} setNextStep = {setNextStep} setPrevStep = {setPrevStep} addDoorDesign = {doorDesigns.addDoorDesign} setDoorSize={doorDesigns.setDoorSize} clearDoorDesigns = {doorDesigns.clearDoorDesigns}/>}/>}
-      {currentStep == "2-add-doors" &&  <GeneralLayout2 title="Add Your Garage Doors" text="Add a garage door for every garage door present on you image." canvas = {<Canvas1 />} action={DefineDoors}/>}
-      {currentStep == "3-design-door" &&  <GeneralLayout2 title="Select A Door To Design" text="Add a garage door for every garage door present on you image." canvas = {<Canvas1 />} action={DefineDoors}/>}
+      {currentStep == "1-mockup" &&  <GeneralLayout1 title="Choose House Image" text="Choose a preconfigured image, or upload you own." action={<ImageSelect setMockupImage = {setMockupImage} mockupImage = {mockupImage} getDoorPosition = {doorDesigns.getDoorPosition} setDoorPosition = {doorDesigns.setDoorPosition} setNextStep = {setNextStep} setPrevStep = {setPrevStep} addDoorDesign = {doorDesigns.addDoorDesign} clearDoorDesigns = {doorDesigns.clearDoorDesigns}/>}/>}
+      {currentStep == "2-add-doors" &&  <GeneralLayout2 title="Add Your Garage Doors" text="Add a garage door for every garage door present on you image." canvas = {<Canvas1 mockupImage = {mockupImage} getDoorPosition = {doorDesigns.getDoorPosition} setDoorPosition = {doorDesigns.setDoorPosition}/>} action={<DefineDoors setNextStep = {setNextStep} setPrevStep = {setPrevStep} addDoorDesign = {doorDesigns.addDoorDesign} removeDoorDesign = {doorDesigns.removeDoorDesign} setDoorSize={doorDesigns.setDoorSize} setDoorPosition = {doorDesigns.setDoorPosition} doorDesigns={doorDesigns.doorDesigns}/>}/>}
     </Flex>
   )
 }

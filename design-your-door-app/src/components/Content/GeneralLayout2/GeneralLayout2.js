@@ -12,9 +12,9 @@ function GeneralLayout2({title, text, action, canvas}) {
             <Heading size='md'>{title}</Heading>
             <Text pt='2.5'size='md'>{text}</Text>
         </Center>
-        <Center flex='2' px='5' flexDirection='column' alignItems='left' >
+        <Box flex='3' px='5' py='5' flexDirection='column' alignItems='left' >
             {action}
-        </Center>
+        </Box>
       </Flex>
     </Flex>
   )
