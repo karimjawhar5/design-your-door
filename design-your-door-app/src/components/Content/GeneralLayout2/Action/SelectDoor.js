@@ -27,7 +27,7 @@ function DefineDoors({setCurrentDoor, currentDoor, setNextStep, setPrevStep, doo
           <Heading size="sm">Your Garage Doors</Heading>
           {
             doorDesigns.map((door, index)=>(
-              <Flex key={index} bgColor={currentDoor == index? 'orange.100' : 'gray.100'} p={3} my={2} onClick={()=>handleDoorSelect(index)}>
+              <Flex key={index} bgColor={currentDoor == index? 'orange.100' : 'gray.100'} border='1px' borderColor={currentDoor == index? 'orange.300' : 'gray.300'}  p={3} my={2} onClick={()=>handleDoorSelect(index)}>
                 <Text size='md' flex={1} my='auto'>{'Garage Door ' + (index+1)}</Text>
               </Flex>
             ))
