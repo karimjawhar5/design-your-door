@@ -55,7 +55,7 @@ function useDoorDesigns() {
         const cols = sizeFunction(length, height)[0];
         const rows = sizeFunction(length, height)[1];
         const newDoorDesign = {
-            position: [],
+            position: [[0,0], [100,0], [0,100], [100,100]],
             dimensions: { length: length, height: height },
             grid: [cols, rows],
             doorStyle: null,

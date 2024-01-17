@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Stage, Layer, Rect, Image, Line, Circle } from 'react-konva';
+import { Stage, Layer, Rect, Line } from 'react-konva';
 
-function DoorPositioner({ mockupImage, getDoorPosition, setDoorPosition, doorDesigns }) {
+function DoorOutline({ mockupImage, doorDesigns, currentDoor }) {
   const [image] = useState(new window.Image());
   const [imageSize, setImage] = useState([0,0]);
-
-  const handleCornerDrag = (doorIndex, cornerIndex, { target }) => {
-    const newCorners = doorDesigns[doorIndex].position;
-    newCorners[cornerIndex] = [target.x(), target.y()];
-    setDoorPosition(doorIndex, newCorners);
-  };
 
   useEffect(() => {
     // Set the image source
@@ -58,22 +52,9 @@ function DoorPositioner({ mockupImage, getDoorPosition, setDoorPosition, doorDes
                   door.position[2][0], door.position[2][1],
                 ]}
                 closed={true}
-                fill='red'
-                opacity={0.5}
+                fill={currentDoor == doorIndex? 'orange': 'white'}
+                opacity={1}
               />
-            {
-              door.position.map((corner, cornerIndex) => (
-                <Circle
-                  key={cornerIndex}
-                  x={corner[0]}
-                  y={corner[1]}
-                  radius={13}
-                  stroke='white'
-                  draggable
-                  onDragMove={(e) => handleCornerDrag(doorIndex, cornerIndex, e)}
-                />
-              ))
-            }
           </>
           ))
         }
@@ -82,4 +63,4 @@ function DoorPositioner({ mockupImage, getDoorPosition, setDoorPosition, doorDes
   );
 }
 
-export default DoorPositioner;
+export default DoorOutline;

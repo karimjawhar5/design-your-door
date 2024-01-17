@@ -1,7 +1,7 @@
 import './App.css';
 
 import { useState } from 'react';
-import { Flex } from '@chakra-ui/react'
+import { Flex, Center } from '@chakra-ui/react'
 
 import Content from './components/Content/Content';
 import Footer from './components/Footer';
@@ -17,13 +17,13 @@ function App() {
   const [mockupImage, setMockupImage] = useState(null)
   
   return (
-    <div className="App">
-      <Flex flexDirection="column" maxH="100vh">
+    <Center className="App" h='100vh' w='100vw' bg='blue.100'>
+      <Flex flexDirection="column" h="780px" w='1440px' overflow='hidden' bgColor='white'>
         <Header currentStep = {currentStep}/>
         <Content currentStep = {currentStep} setNextStep={setNextStep} setPrevStep={setPrevStep} doorDesigns = {doorDesigns} mockupImage = {mockupImage} setMockupImage = {setMockupImage}/>
         <Footer currentStep = {currentStep} nextStep = {nextStep} prevStep = {prevStep} setPrevStep={setPrevStep} forward={forward} backward={backward}/>
       </Flex>
-    </div>
+    </Center>
   );
 }
 

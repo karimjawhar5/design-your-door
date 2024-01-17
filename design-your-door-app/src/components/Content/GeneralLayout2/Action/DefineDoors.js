@@ -21,6 +21,23 @@ function DefineDoors({setNextStep, setPrevStep, addDoorDesign, removeDoorDesign,
 
 
 
+  useEffect(()=>{
+    setNextStep(null);
+    if(doorDesigns.length > 0){
+      setNextStep("3-design-door");
+    }else{
+      setNextStep(null);
+    }
+  }, [])
+
+  useEffect(()=>{
+    if(doorDesigns.length > 0){
+      setNextStep("3-design-door");
+    }else{
+      setNextStep(null);
+    }
+  }, [doorDesigns])
+
   const handleGarageDoorEdit = (door, index) => {
     setDoorInProgress(true);
     console.log(door)
