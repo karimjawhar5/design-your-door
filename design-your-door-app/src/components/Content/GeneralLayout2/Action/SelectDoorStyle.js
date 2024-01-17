@@ -1,17 +1,48 @@
-import {useEffect, useState} from 'react'
-import {Box, Flex, Grid} from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react';
+import { Box, SimpleGrid } from '@chakra-ui/react';
+import SelectCard from '../Helpers/SelectCard';
 
-function SelectDoorStyle({setDoorStyle, currentDoor, setNextStep, setPrevStep, doorDesigns}) {
+const availableDoorStyles = [
+  ['raised', '/assets/design/styles/raised.jpg'],
+  ['carriage', '/assets/design/styles/carriage.jpg'], // Corrected image paths
+  ['flush', '/assets/design/styles/flush.jpg'], // Corrected image paths
+];
 
-    useEffect(()=>{
-        setNextStep(null);
-    }, []);
+function SelectDoorStyle({ setDoorStyle, currentDoor, setNextStep, getDoorStyle }) {
+  const [selectedStyle, setSelectedStyle] = useState(null);
+
+  useEffect(() => {
+    const doorStyle = getDoorStyle(currentDoor);
+    if (doorStyle) {
+      const indexOfStyle = availableDoorStyles.findIndex(style => style[0] === doorStyle);
+      setSelectedStyle(indexOfStyle);
+      setNextStep("3-door-shape");
+    } else {
+      setNextStep(null);
+    }
+  }, [currentDoor, getDoorStyle, setNextStep]);
+
+  const handleSelect = (index) => {
+    setSelectedStyle(index);
+    setDoorStyle(availableDoorStyles[index][0], currentDoor);
+    setNextStep("3-door-shape");
+  };
 
   return (
     <Box>
-
+      <SimpleGrid columns={2} spacing={3}>
+        {availableDoorStyles.map((doorStyle, index) => (
+          <SelectCard
+            key={index}
+            image={doorStyle[1]}
+            text={doorStyle[0]}
+            isSelected={selectedStyle === index}
+            onClick={() => handleSelect(index)}
+          />
+        ))}
+      </SimpleGrid>
     </Box>
-  )
+  );
 }
 
-export default SelectDoorStyle
+export default SelectDoorStyle;
