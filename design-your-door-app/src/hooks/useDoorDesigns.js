@@ -2,14 +2,15 @@ import { useState } from "react";
 function useDoorDesigns() {
     const [doorDesigns, setDoorDesigns] = useState([
         {
-        position:[[0,0], [100,0], [0,100], [100,100]],
-        dimensions: { length: [8, 0], height: [7, 0] },
-        grid: [2, 4],
-        doorStyle: 'raised',
-        doorType: 'short',
-        doorColour: 'white',
-        windowInsert: { style: 'cascade', colour: 'white'},
-        glass: 'clear'
+            position: [[200,200], [500,200], [200,500], [500,500]],
+            dimensions: { length: 8, height: 8 },
+            grid: [8, 8],
+            doorStyle: null,
+            doorType: null,
+            doorColour: null,
+            windowInsert: { style: null, colour: null, position: null},
+            windowLayout: null,
+            glass: null
         }
     ]);
 
@@ -55,13 +56,14 @@ function useDoorDesigns() {
         const cols = sizeFunction(length, height)[0];
         const rows = sizeFunction(length, height)[1];
         const newDoorDesign = {
-            position: [[0,0], [100,0], [0,100], [100,100]],
+            position: [[200,200], [500,200], [200,500], [500,500]],
             dimensions: { length: length, height: height },
             grid: [cols, rows],
             doorStyle: null,
             doorType: null,
             doorColour: null,
-            windowInsert: { style: null, colour: null },
+            windowInsert: { style: null, colour: null, position: null},
+            windowLayout: null,
             glass: null
         };
 
@@ -111,8 +113,14 @@ function useDoorDesigns() {
     const getWindowInsert = (index) => {
         return doorDesigns[index].windowInsert;
     }
+    const getWindowInsertColour = (index) => {
+        return doorDesigns[index].windowInsert.colour;
+    }
+    const getWindowLayout = (index) => {
+        return doorDesigns[index].windowLayout;
+    }
 
-    const getGlassType = (index) => {
+    const getGlass = (index) => {
         return doorDesigns[index].glass;
     }
 
@@ -170,14 +178,15 @@ function useDoorDesigns() {
         return newDesigns;
         });
     };
-    const setWindowInsertStyle = (newWindowInsertStyle, index) => {
+    const setWindowInsert = (newWindowInsertStyle, newWindowInsertPosition, index) => {
         setDoorDesigns((prevDesigns) => {
         const newDesigns = [...prevDesigns];
         newDesigns[index] = {
             ...newDesigns[index],
             windowInsert: {
-            ...newDesigns[index].windowInsert,
-            style: newWindowInsertStyle
+            style: newWindowInsertStyle, 
+            colour: newDesigns[index].doorColour,
+            position: newWindowInsertPosition
             }
         };
         return newDesigns;
@@ -189,9 +198,19 @@ function useDoorDesigns() {
         newDesigns[index] = {
             ...newDesigns[index],
             windowInsert: {
-            ...newDesigns[index].windowInsert,
-            colour: newWindowInsertColour
+                ...newDesigns[index].windowInsert,
+                colour: newWindowInsertColour
             }
+        };
+        return newDesigns;
+        });
+    };
+    const setWindowLayout = (newWindowLayout, index) => {
+        setDoorDesigns((prevDesigns) => {
+        const newDesigns = [...prevDesigns];
+        newDesigns[index] = {
+            ...newDesigns[index],
+            windowLayout: newWindowLayout
         };
         return newDesigns;
         });
@@ -219,14 +238,17 @@ function useDoorDesigns() {
         getDoorType,
         getDoorColour,
         getWindowInsert,
-        getGlassType,
+        getWindowInsertColour,
+        getWindowLayout,
+        getGlass,
         setDoorSize,
         setDoorPosition,
         setDoorStyle,
         setDoorType,
         setDoorColour,
-        setWindowInsertStyle,
+        setWindowInsert,
         setWindowInsertColour,
+        setWindowLayout,
         setGlass,
         availableDoorStyles,
         availableDoorTypes,

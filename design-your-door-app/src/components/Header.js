@@ -21,7 +21,7 @@ function Header({currentStep}) {
                 <Image src='/blogo.svg'></Image>
             </Center>
 
-            <Flex spacingx px="8" py="3" flex="5" gap="2.5" borderRight="1px" borderColor="gray.300">
+            <Flex px="8" py="3" flex="5" gap="2.5" borderRight="1px" borderColor="gray.300">
           <Center {...getStepBoxStyle(1)}>
             <Box>
               <Text size="sm">Step 1</Text>

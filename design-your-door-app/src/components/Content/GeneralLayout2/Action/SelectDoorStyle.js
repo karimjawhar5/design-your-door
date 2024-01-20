@@ -16,7 +16,12 @@ function SelectDoorStyle({ setDoorStyle, currentDoor, setNextStep, getDoorStyle 
     if (doorStyle) {
       const indexOfStyle = availableDoorStyles.findIndex(style => style[0] === doorStyle);
       setSelectedStyle(indexOfStyle);
-      setNextStep("3-door-shape");
+      if(doorStyle !== 'flush'){
+        setNextStep("3-door-type");
+      }else{
+        setNextStep("3-door-colour");
+      }
+      
     } else {
       setNextStep(null);
     }
@@ -25,7 +30,6 @@ function SelectDoorStyle({ setDoorStyle, currentDoor, setNextStep, getDoorStyle 
   const handleSelect = (index) => {
     setSelectedStyle(index);
     setDoorStyle(availableDoorStyles[index][0], currentDoor);
-    setNextStep("3-door-shape");
   };
 
   return (
