@@ -8,17 +8,10 @@ const defaultMockups = [
   {path:'/assets/house-images/mockup1.jpg', sizes:[[[8,0],[7,0]]], positions:[[[0,0],[100,0],[0,100],[100,100]]]}
 ];
 
-const ImageSelect = ({setMockupImage, setDoorPosition, setNextStep, setPrevStep, addDoorDesign, clearDoorDesigns}) => {
+const ImageSelect = ({setMockupImage, setDoorPosition, addDoorDesign, clearDoorDesigns, setNextStep}) => {
 
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
-
-  useEffect(()=>{
-    clearDoorDesigns();
-    setMockupImage(null);
-    setNextStep(null);
-    setPrevStep(null);
-  }, [])
 
   const handleSelect = (index) => {
       setSelectedIndex(index+1);

@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Flex, Text, Center, Image, Heading } from '@chakra-ui/react'
 import { HamburgerIcon, InfoIcon } from '@chakra-ui/icons'
 
-function Header({currentStep}) {
+function Header({getCurrentStep, getStepIndex}) {
+  const [currentStep, setCurrentStep] = useState("");
+
+  useEffect (()=>{
+    const step = getCurrentStep();
+    setCurrentStep(step);
+  }, [getStepIndex])
 
     const getStepBoxStyle = (step) => {
         return {

@@ -21,15 +21,17 @@ function SelectDoorStyle({ setDoorStyle, currentDoor, setNextStep, getDoorStyle 
       }else{
         setNextStep("3-door-colour");
       }
-      
-    } else {
-      setNextStep(null);
     }
-  }, [currentDoor, getDoorStyle, setNextStep]);
+  }, []);
 
   const handleSelect = (index) => {
     setSelectedStyle(index);
     setDoorStyle(availableDoorStyles[index][0], currentDoor);
+    if(availableDoorStyles[index][0] !== 'flush'){
+      setNextStep("3-door-type");
+    }else{
+      setNextStep("3-door-colour");
+    }
   };
 
   return (

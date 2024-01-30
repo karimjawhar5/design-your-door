@@ -17,8 +17,6 @@ function SelectGlassType({ setGlassType, getGlassType, currentDoor, setNextStep 
       const indexOfType = availableGlassTypes.findIndex(glass => glass[0] === glassType);
       setSelectedType(indexOfType);
       setNextStep("4-summary");
-    } else {
-      setNextStep(null);
     }
   }, [currentDoor, getGlassType, setNextStep]);
 

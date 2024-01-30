@@ -1,21 +1,13 @@
 import React from 'react'
 import {useEffect} from 'react'
 import {Text, Box, Flex, Spacer, Center, Heading, Button, FormControl, Input, Select, FormLabel, FormErrorMessage, FormHelperText, CardBody, Alert, AlertIcon, AlertTitle, AlertDescription, Link} from '@chakra-ui/react'
-import {AddIcon} from '@chakra-ui/icons'
 
 function DefineDoors({setCurrentDoor, currentDoor, setNextStep, setPrevStep, doorDesigns}) {
 
   useEffect(()=>{
-    setNextStep(null);
-    setCurrentDoor(null);
-  }, [])
-
-  useEffect(()=>{
     if(currentDoor !== null){
-        setNextStep("3-door-style");
-    }else{
-        setNextStep(null);
-    }
+      setNextStep("3-door-style");
+  }
   }, [currentDoor])
 
   const handleDoorSelect = (index) => {

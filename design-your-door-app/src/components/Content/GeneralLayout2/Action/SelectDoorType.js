@@ -16,8 +16,6 @@ function SelectDoorType({ setDoorType, getDoorType, currentDoor, setNextStep }) 
       const indexOfType = availableDoorTypes.findIndex(style => style[0] === doorType);
       setSelectedType(indexOfType);
       setNextStep("3-door-colour");
-    } else {
-      setNextStep(null);
     }
   }, [currentDoor, getDoorType, setNextStep]);
 

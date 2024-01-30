@@ -18,8 +18,6 @@ function SelectWindowInsertColour({ setWindowInsertColour, getWindowInsertColour
         setNextStep("3-glass");
       
       
-    } else {
-      setNextStep(null);
     }
   }, [currentDoor, getWindowInsertColour, setNextStep]);
 

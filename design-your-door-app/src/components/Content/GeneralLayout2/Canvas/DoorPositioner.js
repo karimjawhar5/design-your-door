@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Stage, Layer, Rect, Image, Line, Circle } from 'react-konva';
+import { useEffect, useState, Fragment } from 'react';
+import { Stage, Layer, Rect, Line, Circle } from 'react-konva';
 
-function DoorPositioner({ mockupImage, getDoorPosition, setDoorPosition, doorDesigns }) {
+function DoorPositioner({ mockupImage, setDoorPosition, doorDesigns }) {
   const [image] = useState(new window.Image());
   const [imageSize, setImage] = useState([0,0]);
 
@@ -45,12 +45,10 @@ function DoorPositioner({ mockupImage, getDoorPosition, setDoorPosition, doorDes
           fillPatternOffset={(imageSize[0]/imageSize[1]) > 1.73 ? { x:((imageSize[0]-(1040/(600/imageSize[1])))/2), y:0}: { x:0, y:((imageSize[1]-(600/(1040/imageSize[0])))/2)}}
           fillPatternRepeat='no-repeat'
         />
-        {/* Add your shapes or other components here */}
-
         {
           doorDesigns.map((door, doorIndex) => (
-            <>
-            <Line
+            <Fragment key={`door-${doorIndex}`}>
+              <Line
                 points={[
                   door.position[0][0], door.position[0][1],
                   door.position[1][0], door.position[1][1],
@@ -61,20 +59,20 @@ function DoorPositioner({ mockupImage, getDoorPosition, setDoorPosition, doorDes
                 fill='red'
                 opacity={0.5}
               />
-            {
-              door.position.map((corner, cornerIndex) => (
-                <Circle
-                  key={cornerIndex}
-                  x={corner[0]}
-                  y={corner[1]}
-                  radius={13}
-                  stroke='white'
-                  draggable
-                  onDragMove={(e) => handleCornerDrag(doorIndex, cornerIndex, e)}
-                />
-              ))
-            }
-          </>
+              {
+                door.position.map((corner, cornerIndex) => (
+                  <Circle
+                    key={`corner-${doorIndex}-${cornerIndex}`}
+                    x={corner[0]}
+                    y={corner[1]}
+                    radius={13}
+                    stroke='white'
+                    draggable
+                    onDragMove={(e) => handleCornerDrag(doorIndex, cornerIndex, e)}
+                  />
+                ))
+              }
+            </Fragment>
           ))
         }
       </Layer>

@@ -22,8 +22,6 @@ function SelectDoorColour({ setDoorColour, getDoorColour, currentDoor, setNextSt
       }
       
       
-    } else {
-      setNextStep(null);
     }
   }, [currentDoor, getDoorColour, setNextStep]);
 

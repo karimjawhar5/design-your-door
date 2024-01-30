@@ -1,46 +1,32 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
-import {Text, Box, Flex, Spacer, Center, Heading, Button, FormControl, Input, Select, FormLabel, FormErrorMessage, FormHelperText, CardBody, Alert, AlertIcon, AlertTitle, AlertDescription, Link} from '@chakra-ui/react'
+import {Text, Box, Flex, Spacer, Center, Heading, Button, FormControl, Select, FormLabel, Alert, AlertIcon, AlertDescription, Link} from '@chakra-ui/react'
 import {AddIcon} from '@chakra-ui/icons'
 
-function DefineDoors({setNextStep, setPrevStep, addDoorDesign, removeDoorDesign, setDoorSize, setDoorPosition, doorDesigns}) {
+function DefineDoors({addDoorDesign, removeDoorDesign, setDoorSize, doorDesigns, setNextStep}) {
   
   const initDoorData = {
     wf: 0,
     wi: 0,
     hf: 0,
     hi: 0,
-    shape: null,
+    shape: "",
     new: true,
-    index: null
+    index: -1
   };
 
   const [saveError, setSaveError] = useState(false);
   const [doorInProgress, setDoorInProgress] = useState(false);
   const [doorData, setDoorData] = useState(initDoorData);
 
-
-
-  useEffect(()=>{
-    setNextStep(null);
-    if(doorDesigns.length > 0){
-      setNextStep("3-design-door");
-    }else{
-      setNextStep(null);
-    }
-  }, [])
-
   useEffect(()=>{
     if(doorDesigns.length > 0){
       setNextStep("3-design-door");
-    }else{
-      setNextStep(null);
     }
   }, [doorDesigns])
 
   const handleGarageDoorEdit = (door, index) => {
     setDoorInProgress(true);
-    console.log(door)
     setDoorData({
       wf: door.dimensions.length[0],
       wi: door.dimensions.length[1],

@@ -18,8 +18,6 @@ function SelectWindowLayout({ setWindowLayout, getWindowLayout, currentDoor, set
       setSelectedWindowLayout(indexOfWindowLayout);
       setNextStep("3-glass");
       
-    } else {
-      setNextStep(null);
     }
   }, [currentDoor, getWindowLayout, setNextStep]);
 
