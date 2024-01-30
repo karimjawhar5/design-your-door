@@ -79,6 +79,15 @@ function useDoorDesigns() {
     const clearDoorDesigns = () => {
         setDoorDesigns([]);
     };
+    const getIncompleteDoorDesign = () => {
+        var incompleteDoorDesign = null;
+        for (let i = 0; i < doorDesigns.length; i++){
+            if (doorDesigns[i].doorColour === null){
+                incompleteDoorDesign = i
+            }
+        }
+        return incompleteDoorDesign;
+    };
 
     const availableDoorStyles = ['raised', 'carriage', 'flush'];
     const availableDoorTypes = ['short', 'long'];
@@ -253,7 +262,8 @@ function useDoorDesigns() {
         availableDoorStyles,
         availableDoorTypes,
         availableColours,
-        availableWindowInsertStyles
+        availableWindowInsertStyles,
+        getIncompleteDoorDesign
     }
 }
 

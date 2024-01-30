@@ -17,11 +17,12 @@ function SelectDoorType({ setDoorType, getDoorType, currentDoor, setNextStep }) 
       setSelectedType(indexOfType);
       setNextStep("3-door-colour");
     }
-  }, [currentDoor, getDoorType, setNextStep]);
+  }, [currentDoor]);
 
   const handleSelect = (index) => {
     setSelectedType(index);
     setDoorType(availableDoorTypes[index][0], currentDoor);
+    setNextStep("3-door-colour");
   };
 
   return (

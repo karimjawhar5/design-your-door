@@ -4,10 +4,10 @@ import SelectCard from '../Helpers/SelectCard';
 
 const availableDoorColours = [
   ['red', 'red.300'],
-  ['blue', 'blue.300'], // Corrected image paths
+  ['blue', 'blue.300'],
 ];
 
-function SelectDoorColour({ setDoorColour, getDoorColour, currentDoor, setNextStep, getDoorStyle }) {
+function SelectDoorColour({ setDoorColour, getDoorColour, getDoorStyle, currentDoor, setNextStep }) {
   const [selectedColour, setSelectedColour] = useState(null);
 
   useEffect(() => {
@@ -15,15 +15,14 @@ function SelectDoorColour({ setDoorColour, getDoorColour, currentDoor, setNextSt
     if (doorColour) {
       const indexOfColour = availableDoorColours.findIndex(style => style[0] === doorColour);
       setSelectedColour(indexOfColour);
+
       if(getDoorStyle(currentDoor)== "flush") {
         setNextStep("3-window-layout");
       }else{
         setNextStep("3-window-insert");
       }
-      
-      
     }
-  }, [currentDoor, getDoorColour, setNextStep]);
+  }, [selectedColour]);
 
   const handleSelect = (index) => {
     setSelectedColour(index);

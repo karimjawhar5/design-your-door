@@ -4,7 +4,7 @@ import SelectCard from '../Helpers/SelectCard';
 
 const availableWindowInsertColours = [
   ['blue', 'blue.300'],
-  ['red', 'red.300'], // Corrected image paths
+  ['red', 'red.300'],
 ];
 
 function SelectWindowInsertColour({ setWindowInsertColour, getWindowInsertColour, currentDoor, setNextStep }) {
@@ -15,11 +15,9 @@ function SelectWindowInsertColour({ setWindowInsertColour, getWindowInsertColour
     if (windowInsertColour) {
       const indexOfColour = availableWindowInsertColours.findIndex(style => style[0] === windowInsertColour);
       setSelectedColour(indexOfColour);
-        setNextStep("3-glass");
-      
-      
+        setNextStep("3-glass"); 
     }
-  }, [currentDoor, getWindowInsertColour, setNextStep]);
+  }, [selectedColour]);
 
   const handleSelect = (index) => {
     setSelectedColour(index);

@@ -6,22 +6,14 @@ function DoorOutline({ mockupImage, doorDesigns, currentDoor }) {
   const [imageSize, setImage] = useState([0,0]);
 
   useEffect(() => {
-    // Set the image source
     image.src = mockupImage;
-
-    // Event listener for image load
     image.onload = () => {
-      // Get image width and height
       const width = image.width;
       const height = image.height;
-
       setImage([width, height])
-
-      // Now you can use the width and height as needed
       console.log(`Image width: ${width}, height: ${height}`);
     };
 
-    // Event listener for image error (optional)
     image.onerror = (error) => {
       console.error(`Error loading image: ${error.message}`);
     };
@@ -39,12 +31,11 @@ function DoorOutline({ mockupImage, doorDesigns, currentDoor }) {
           fillPatternOffset={(imageSize[0]/imageSize[1]) > 1.73 ? { x:((imageSize[0]-(1040/(600/imageSize[1])))/2), y:0}: { x:0, y:((imageSize[1]-(600/(1040/imageSize[0])))/2)}}
           fillPatternRepeat='no-repeat'
         />
-        {/* Add your shapes or other components here */}
 
         {
           doorDesigns.map((door, doorIndex) => (
-            <>
             <Line
+                key={doorIndex}
                 points={[
                   door.position[0][0], door.position[0][1],
                   door.position[1][0], door.position[1][1],
@@ -55,7 +46,6 @@ function DoorOutline({ mockupImage, doorDesigns, currentDoor }) {
                 fill={currentDoor == doorIndex? 'orange': 'white'}
                 opacity={1}
               />
-          </>
           ))
         }
       </Layer>

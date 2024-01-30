@@ -57,9 +57,6 @@ function DefineDoors({addDoorDesign, removeDoorDesign, setDoorSize, doorDesigns,
   const handleSaveDoor = () => {
     // Check if all required data is selected before saving
     if (doorData.wf !== 0 && doorData.hf !== 0 && doorData.shape !== '') {
-      // Perform save action here
-      console.log('Door data saved:', doorData);
-      // Reset the form and setDoorInProgress to false
       setDoorData(initDoorData);
       setSaveError(false);
       setDoorInProgress(false);

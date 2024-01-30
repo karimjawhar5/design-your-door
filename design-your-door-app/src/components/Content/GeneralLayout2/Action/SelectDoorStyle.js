@@ -8,30 +8,31 @@ const availableDoorStyles = [
   ['flush', '/assets/design/styles/flush.jpg'], // Corrected image paths
 ];
 
-function SelectDoorStyle({ setDoorStyle, currentDoor, setNextStep, getDoorStyle }) {
-  const [selectedStyle, setSelectedStyle] = useState(null);
+function SelectDoorStyle({ getDoorStyle, setDoorStyle, currentDoor, setNextStep}) {
+  const [selectedStyleIndex, setSelectedStyleIndex] = useState(null);
 
   useEffect(() => {
     const doorStyle = getDoorStyle(currentDoor);
     if (doorStyle) {
-      const indexOfStyle = availableDoorStyles.findIndex(style => style[0] === doorStyle);
-      setSelectedStyle(indexOfStyle);
-      if(doorStyle !== 'flush'){
-        setNextStep("3-door-type");
-      }else{
-        setNextStep("3-door-colour");
-      }
+      updateSelectedStyle(doorStyle);
     }
-  }, []);
+  }, [currentDoor]);
+
+  const updateSelectedStyle = (doorStyle) => {
+    const indexOfStyle = availableDoorStyles.findIndex(style => style[0] === doorStyle);
+    setSelectedStyleIndex(indexOfStyle);
+    updateNextStepBasedOnStyle(doorStyle);
+  };
+
+  const updateNextStepBasedOnStyle = (style) => {
+    setNextStep(style !== 'flush' ? "3-door-type" : "3-door-colour");
+  };
 
   const handleSelect = (index) => {
-    setSelectedStyle(index);
-    setDoorStyle(availableDoorStyles[index][0], currentDoor);
-    if(availableDoorStyles[index][0] !== 'flush'){
-      setNextStep("3-door-type");
-    }else{
-      setNextStep("3-door-colour");
-    }
+    const selectedStyleIndex = availableDoorStyles[index][0];
+    setSelectedStyleIndex(index);
+    setDoorStyle(selectedStyleIndex, currentDoor);
+    updateNextStepBasedOnStyle(selectedStyleIndex);
   };
 
   return (
@@ -42,7 +43,7 @@ function SelectDoorStyle({ setDoorStyle, currentDoor, setNextStep, getDoorStyle 
             key={index}
             image={doorStyle[1]}
             text={doorStyle[0]}
-            isSelected={selectedStyle === index}
+            isSelected={selectedStyleIndex === index}
             onClick={() => handleSelect(index)}
           />
         ))}

@@ -3,13 +3,42 @@ import { useState } from "react";
 const useSteps = () => {
   const [steps, setSteps] = useState(["1-mockup"]);
   const [stepIndex, setStepIndex] = useState(0);
+  const [jumpStep, setJumpStep] = useState(null);
+
+  function splitArrayAtString(array, splitter) {
+    let result = [];
+    let currentSubArray = [];
+
+    array.forEach(item => {
+        if (item === splitter) {
+            if (currentSubArray.length > 0) {
+                result.push(currentSubArray);
+                currentSubArray = [];
+            }
+        } else {
+            currentSubArray.push(item);
+        }
+    });
+
+    if (currentSubArray.length > 0) {
+        result.push(currentSubArray);
+    }
+
+    return result;
+}
 
   const forward = () => {
-    const newStepIndex = stepIndex + 1;
+    if (jumpStep){
+      const newSteps = splitArrayAtString(jumpStep);
+      setSteps(newSteps);
+      setStepIndex(newSteps.length - 1);
+    }else{
+      const newStepIndex = stepIndex + 1;
     if(steps.length > newStepIndex){
       setStepIndex(newStepIndex);
     }else{
       console.log("No next step available");
+    }
     }
   };
 
@@ -27,15 +56,6 @@ const useSteps = () => {
   const setNextStep = (stepName) => {
       const newSteps = [...steps.slice(0, stepIndex+1), stepName];
       setSteps(newSteps);
-  }
-
-  const setPrevStep = (stepName) => {
-    if (steps.length >= 2) {
-      const newSteps = [...steps.slice(0, -2), stepName, ...steps.slice(-1)];
-      setSteps(newSteps);
-    } else {
-      console.warn('Not enough elements in the array to replace the second last element.');
-    }
   }
 
   const currentStep = () => {
@@ -57,12 +77,12 @@ const useSteps = () => {
   return {
     stepIndex,
     currentStep,
-    setPrevStep,
     prevStep,
     setNextStep,
     nextStep,
     forward,
-    backward
+    backward,
+    setJumpStep
   };
 };
 

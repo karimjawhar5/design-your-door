@@ -11,7 +11,7 @@ import useSteps from './hooks/useSteps'
 import useDoorDesigns from './hooks/useDoorDesigns';
 
 function App() {
-  const { stepIndex, currentStep, setPrevStep, setNextStep, forward, backward, nextStep, prevStep } = useSteps();
+  const { stepIndex, currentStep, setPrevStep, setNextStep, forward, backward, nextStep, prevStep, setJumpStep } = useSteps();
   const doorDesigns = useDoorDesigns();
   const [doorGraphic, setDoorGraphic] = useState('/assets/door-graphics/design.jpg');
   const [mockupImage, setMockupImage] = useState(null)
@@ -21,7 +21,7 @@ function App() {
       <Flex flexDirection="column" h="780px" w='1440px' overflow='hidden' bgColor='white'>
         <Header getCurrentStep = {currentStep} getStepIndex = {stepIndex}/>
         <Content getStepIndex = {stepIndex} getCurrentStep = {currentStep} setNextStep={setNextStep} setPrevStep={setPrevStep} doorDesigns = {doorDesigns} mockupImage = {mockupImage} setMockupImage = {setMockupImage}/>
-        <Footer getNextStep = {nextStep} getPrevStep = {prevStep} forward={forward} backward={backward}/>
+        <Footer setJumpStep = {setJumpStep} getNextStep = {nextStep} getPrevStep = {prevStep} forward={forward} backward={backward}/>
       </Flex>
     </Center>
   );

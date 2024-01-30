@@ -17,9 +17,8 @@ function SelectWindowLayout({ setWindowLayout, getWindowLayout, currentDoor, set
       const indexOfWindowLayout = availableWindowLayouts.findIndex(style => style[0] === windowLayout);
       setSelectedWindowLayout(indexOfWindowLayout);
       setNextStep("3-glass");
-      
     }
-  }, [currentDoor, getWindowLayout, setNextStep]);
+  }, [selectedWindowLayout]);
 
   const handleSelect = (index) => {
     setSelectedWindowLayout(index);

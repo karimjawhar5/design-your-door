@@ -8,17 +8,18 @@ const availableGlassTypes = [
   ['frosted', '/assets/design/glass/frosted.jpg'],
 ];
 
-function SelectGlassType({ setGlassType, getGlassType, currentDoor, setNextStep }) {
+function SelectGlassType({ handleFinish, setGlassType, getGlassType, currentDoor }) {
   const [selectedType, setSelectedType] = useState(null);
 
   useEffect(() => {
     const glassType = getGlassType(currentDoor);
+
     if (glassType) {
       const indexOfType = availableGlassTypes.findIndex(glass => glass[0] === glassType);
       setSelectedType(indexOfType);
-      setNextStep("4-summary");
+      handleFinish();
     }
-  }, [currentDoor, getGlassType, setNextStep]);
+  }, [selectedType]);
 
   const handleSelect = (index) => {
     setSelectedType(index);
